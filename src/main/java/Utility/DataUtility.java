@@ -11,17 +11,30 @@ import java.util.Properties;
 
 public class DataUtility {
     //read data from json
-    public static final String file_path ="src/test/resources/";
-    public static String readJsonFile(String fileName , String key) throws FileNotFoundException {
-        FileReader fileReader =new FileReader(file_path+fileName+".json");
-        JsonElement jsonElement = JsonParser.parseReader(fileReader);
-        return jsonElement.getAsJsonObject().get(key).getAsString();
+    public static String readJsonFile(String fileName , String key)  {
+
+         String file_path ="src/test/resources/";
+
+        try {
+            FileReader fileReader = new FileReader(file_path+fileName+".json");
+            JsonElement jsonElement = JsonParser.parseReader(fileReader);
+            return  jsonElement.getAsJsonObject().get(key).getAsString();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+         return "";
     }
 
     //read data from property file
-    public static String readPropertyFile(String fileName , String propertyKey) throws IOException {
+    public static String readPropertyFile(String fileName , String propertyKey)  {
+        String file_path ="src/test/resources/";
         Properties  properties = new Properties();
-        properties.load(new FileInputStream(file_path+fileName+".properties"));
-        return properties.getProperty(propertyKey);
+        try {
+            properties.load(new FileInputStream(file_path+fileName+".properties"));
+            return properties.getProperty(propertyKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

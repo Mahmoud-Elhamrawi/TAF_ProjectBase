@@ -17,13 +17,15 @@ public class FunctionsUtilities {
     //TODO:: click ele
     public static void clickOnEle(WebDriver driver , By ele)
     {
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(ele));
+        new WebDriverWait(driver, Duration.ofSeconds(10)).
+                until(ExpectedConditions.elementToBeClickable(ele));
+        driver.findElement(ele).click();
     }
 
     //TODO::enter text
     public static void enterText(WebDriver driver , By ele , String text)
     {
-        new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(ele));
+        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(ele));
         driver.findElement(ele).sendKeys(text);
     }
 
@@ -82,6 +84,12 @@ return uniqeNum;
 
     }
 
+
+    //TODO::convert By to WebEle
+    public static WebElement converter(WebDriver driver ,By ele)
+    {
+        return driver.findElement(ele);
+    }
 
     //TODO::Get latest file from list of files
     public static File getLatestFile(String path)
