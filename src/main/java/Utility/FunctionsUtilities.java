@@ -44,12 +44,20 @@ public class FunctionsUtilities {
     }
 
     //TODO::Take screenshot
-    public static String screenPath= "test-outputs/screenShots/";
-    public static void takeScreen(WebDriver driver ,String screenName) throws IOException {
 
-        File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        File Dis = new File(screenPath+screenName+"_"+createTime()+".png");
-        FileUtils.copyFile(src,Dis);
+    private static final String screenPath= "test-outputs/screenShots/";
+    public static void takeScreen(WebDriver driver ,String screenName) {
+        try {
+            File src = ((TakesScreenshot)  driver).getScreenshotAs(OutputType.FILE);
+           // File Dis = new File(screenPath + screenName + "_"+createTime() +  ".png");
+            File Dis = new File(screenPath+screenName+".png");
+            FileUtils.copyFile(src,Dis);
+        }catch (Exception e)
+        {
+            LogUtility.error(e.getMessage());
+            e.printStackTrace();
+        }
+
 
     }
 
