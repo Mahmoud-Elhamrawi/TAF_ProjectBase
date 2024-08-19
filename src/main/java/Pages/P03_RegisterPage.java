@@ -1,6 +1,7 @@
 package Pages;
 
 import Utility.FunctionsUtilities;
+import Utility.LogUtility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,7 +32,16 @@ public class P03_RegisterPage {
     private final By mobileNumberInp = By.id("mobile_number");
     private final By createAccBtn = By.xpath("//button[@data-qa=\"create-account\"]");
 
-    private final By assertOnTitle = By.xpath("//b[.=\"Enter Account Information\"]");
+    private final By assertOnTitleEle = By.xpath("//b[.=\"Enter Account Information\"]");
+
+    // Verify that 'ENTER ACCOUNT INFORMATION' is visible
+    public boolean assertOnTitleFillData()
+    {
+        new WebDriverWait(driver , Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(assertOnTitleEle));
+        LogUtility.info(driver.findElement(assertOnTitleEle).getText());
+        return driver.findElement(assertOnTitleEle).isDisplayed();
+    }
 public P04_AccountCreated fillDataRegistration(String password , String day ,String month , String year,String fName , String lName ,String address,String country ,String state , String city , String zipcode , String mobileNum)
 {
     FunctionsUtilities.clickOnEle(driver,titleInp);
@@ -52,13 +62,7 @@ public P04_AccountCreated fillDataRegistration(String password , String day ,Str
     return new P04_AccountCreated(driver);
 }
 
-   //8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
-    public boolean assertOnTitleFillData(String text)
-    {
-          new WebDriverWait(driver , Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(assertOnTitle));
-        return driver.findElement(assertOnTitle).getText().contains(text);
-    }
+
 
 
 

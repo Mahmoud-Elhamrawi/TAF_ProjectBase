@@ -1,6 +1,7 @@
 package Pages;
 
 import Utility.FunctionsUtilities;
+import Utility.LogUtility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,6 +21,7 @@ public class P01_WelcomePage {
     private final By registerLink = By.xpath("//li/a[@href=\"/login\"]") ;
 
     private final By assertOnLoggingEle =By.xpath("//ul[contains(@class ,'navbar-nav')]//li[10]");
+    private final By assertOnDeleteEle =By.xpath("//ul[contains(@class ,'navbar-nav')]//li[5]");
 
 
 
@@ -41,6 +43,15 @@ public class P01_WelcomePage {
     {
         new WebDriverWait(driver , Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(assertOnLoggingEle));
+        LogUtility.info(driver.findElement(assertOnLoggingEle).getText());
         return driver.findElement(assertOnLoggingEle).isDisplayed();
+    }
+
+    public boolean assertOnDeleteLink()
+    {
+        new WebDriverWait(driver , Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(assertOnDeleteEle));
+        LogUtility.info(driver.findElement(assertOnDeleteEle).getText());
+        return driver.findElement(assertOnDeleteEle).isDisplayed();
     }
 }

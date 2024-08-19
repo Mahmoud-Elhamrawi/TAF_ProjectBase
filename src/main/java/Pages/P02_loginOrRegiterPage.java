@@ -2,6 +2,7 @@ package Pages;
 
 import Utility.DataUtility;
 import Utility.FunctionsUtilities;
+import Utility.LogUtility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +24,16 @@ public class P02_loginOrRegiterPage {
     private final By emailInp = By.xpath("//input[@data-qa=\"signup-email\"]");
     private final By registerBtn = By.xpath("//button[@data-qa=\"signup-button\"]");
 
-    private final By newUserSignUp = By.xpath("//h2[.='New User Signup!']");
+    private final By newUserSignUpEle = By.xpath("//h2[.='New User Signup!']");
+
+    //Verify 'New User Signup!' is visible
+    public boolean assertOnSignupVisible()
+    {
+        new WebDriverWait(driver , Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(newUserSignUpEle));
+        LogUtility.info(driver.findElement(newUserSignUpEle).getText());
+        return driver.findElement(newUserSignUpEle).isDisplayed();
+    }
 
     public P03_RegisterPage navigateToRegisterPage(String name , String email)  {
         FunctionsUtilities.enterText(driver,nameInp, name);
@@ -32,12 +42,6 @@ public class P02_loginOrRegiterPage {
         return  new P03_RegisterPage(driver);
     }
 
-    //Verify 'New User Signup!' is visible
-    public boolean assertOnSignupVisible(String text)
-    {
-        new WebDriverWait(driver , Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(newUserSignUp));
-        return driver.findElement(newUserSignUp).getText().contains(text);
-    }
+
 
 }
