@@ -22,7 +22,7 @@ public class TC01_RegisterTestCase extends TestBase {
 
 
     public String name = DataUtility.readJsonFile("initialRegister", "name") + FunctionsUtilities.createTime();
-    public String email = DataUtility.readJsonFile("initialRegister", "email") + FunctionsUtilities.generateRandomNumber(10);
+    public String email = DataUtility.readJsonFile("initialRegister", "email");
 
     public String password = DataUtility.readJsonFile("userRegister", "password");
     public String day = DataUtility.readJsonFile("userRegister", "day");
